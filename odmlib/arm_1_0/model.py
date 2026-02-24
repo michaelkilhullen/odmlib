@@ -122,7 +122,7 @@ class StudyName(DEF.StudyName):
     _content = DEF.StudyName._content
 
 class GlobalVariables(DEF.GlobalVariables):
-    StudyName = DEF.StudyName
+    StudyName = DEF.GlobalVariables.StudyName
     StudyDescription = DEF.GlobalVariables.StudyDescription
     ProtocolName = DEF.GlobalVariables.ProtocolName
 
