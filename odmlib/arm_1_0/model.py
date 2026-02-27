@@ -9,9 +9,11 @@ class Description(DEF.Description):
     TranslatedText = DEF.Description.TranslatedText
 
 class WhereClauseRef(DEF.WhereClauseRef):
+    namespace = "def"
     WhereClauseOID = DEF.WhereClauseRef.WhereClauseOID
 
 class PDFPageRef(DEF.PDFPageRef):
+    namespace = "def"
     Type = DEF.PDFPageRef.Type
     PageRefs = DEF.PDFPageRef.PageRefs
     FirstPage = DEF.PDFPageRef.FirstPage
@@ -19,6 +21,7 @@ class PDFPageRef(DEF.PDFPageRef):
     Title = DEF.PDFPageRef.Title
 
 class DocumentRef(DEF.DocumentRef):
+    namespace = "def"
     leafID = DEF.DocumentRef.leafID
     PDFPageRef = T.ODMListObject(element_class=PDFPageRef)
 
@@ -64,15 +67,15 @@ class AnalysisDatasets(OE.ODMElement):
 class AnalysisResult(OE.ODMElement):
     namespace = "arm"
     OID = T.OID(required=True)
-    ParameterOID = T.OID
+    ParameterOID = T.OIDRef(required=False)
     AnalysisReason = T.ExtendedValidValues(required=True, valid_values=["SPECIFIED IN PROTOCOL", "SPECIFIED IN SAP",
-                                                                        "DATA DRIVEN", "REQUESTED BY REGULATORY AGENCY"], namespace="arm")
+                                                                        "DATA DRIVEN", "REQUESTED BY REGULATORY AGENCY"])
     AnalysisPurpose = T.ExtendedValidValues(required=True, valid_values=["PRIMARY OUTCOME MEASURE", "SECONDARY OUTCOME MEASURE",
-                                                                         "EXPLORATORY OUTCOME MEASURE"], namespace="arm")
+                                                                         "EXPLORATORY OUTCOME MEASURE"])
     Description = T.ODMObject(element_class=Description)
-    AnalysisDatasets = T.ODMObject(element_class=AnalysisDatasets, namespace="arm")
     Documentation = T.ODMObject(element_class=Documentation, namespace="arm")
     ProgrammingCode = T.ODMObject(element_class=ProgrammingCode, namespace="arm")
+    AnalysisDatasets = T.ODMObject(element_class=AnalysisDatasets, namespace="arm")
 
 class ResultDisplay(OE.ODMElement):
     namespace = "arm"
@@ -139,18 +142,22 @@ class ItemRef(DEF.ItemRef):
     WhereClauseRef = DEF.ItemRef.WhereClauseRef
 
 class title(DEF.title):
+    namespace = "def"
     _content = DEF.title._content
 
 class leaf(DEF.leaf):
+    namespace = "def"
     ID = DEF.leaf.ID
     href = DEF.leaf.href
     title = DEF.leaf.title
 
 class SubClass(DEF.SubClass):
+    namespace = "def"
     Name = DEF.SubClass.Name
     ParentClass = DEF.SubClass.ParentClass
 
 class Class(DEF.Class):
+    namespace = "def"
     Name = DEF.Class.Name
     SubClass = DEF.Class.SubClass
 
@@ -200,9 +207,11 @@ class CodeListRef(DEF.CodeListRef):
     CodeListOID = DEF.CodeListRef.CodeListOID
 
 class ValueListRef(DEF.ValueListRef):
+    namespace = "def"
     ValueListOID = DEF.ValueListRef.ValueListOID
 
 class PDFPageRef(DEF.PDFPageRef):
+    namespace = "def"
     Type = DEF.PDFPageRef.Type
     PageRefs = DEF.PDFPageRef.PageRefs
     FirstPage = DEF.PDFPageRef.FirstPage
@@ -210,10 +219,12 @@ class PDFPageRef(DEF.PDFPageRef):
     Title = DEF.PDFPageRef.Title
 
 class DocumentRef(DEF.DocumentRef):
+    namespace = "def"
     leafID = DEF.DocumentRef.leafID
     PDFPageRef = DEF.DocumentRef.PDFPageRef
 
 class Origin(DEF.Origin):
+    namespace = "def"
     Type = DEF.Origin.Type
     Source = DEF.Origin.Source
     Description = DEF.Origin.Description
@@ -283,17 +294,21 @@ class MethodDef(DEF.MethodDef):
     DocumentRef = DEF.MethodDef.DocumentRef
 
 class AnnotatedCRF(DEF.AnnotatedCRF):
+    namespace = "def"
     DocumentRef = DEF.AnnotatedCRF.DocumentRef
 
 class SupplementalDoc(DEF.SupplementalDoc):
+    namespace = "def"
     DocumentRef = DEF.SupplementalDoc.DocumentRef
 
 class WhereClauseDef(DEF.WhereClauseDef):
+    namespace = "def"
     OID = DEF.WhereClauseDef.OID
     CommentOID = DEF.WhereClauseDef.CommentOID
     RangeCheck = DEF.WhereClauseDef.RangeCheck
 
 class ValueListDef(DEF.ValueListDef):
+    namespace = "def"
     OID = DEF.ValueListDef.OID
     Description = DEF.ValueListDef.Description
     ItemRef = DEF.ValueListDef.ItemRef
@@ -308,11 +323,13 @@ class ValueListDef(DEF.ValueListDef):
         return iter(self.ItemRef)
 
 class CommentDef(DEF.CommentDef):
+    namespace = "def"
     OID = DEF.CommentDef.OID
     Description = DEF.CommentDef.Description
     DocumentRef = DEF.CommentDef.DocumentRef
 
 class Standard(DEF.Standard):
+    namespace = "def"
     OID = DEF.Standard.OID
     Name = DEF.Standard.Name
     Type = DEF.Standard.Type
@@ -322,6 +339,7 @@ class Standard(DEF.Standard):
     CommentOID = DEF.Standard.CommentOID
 
 class Standards(DEF.Standards):
+    namespace = "def"
     Standard = DEF.Standards.Standard
 
     def __len__(self):
